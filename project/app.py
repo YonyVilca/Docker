@@ -1,18 +1,26 @@
 from flask import Flask
-from flask import request
-from flask import jsonify
-from flask import render_template
-from flask_cors import CORS, cross_origin 
-
-from backend.blueprints.task_blueprint import task_blueprint
+from flask_cors import CORS
+from flask_jwt_extended import JWTManager
+from backend.blueprints.autor_blueprint import autor_blueprint
+from backend.blueprints.genero_blueprint import genero_blueprint
+from backend.blueprints.libro_blueprint import libro_blueprint
 from backend.blueprints.user_blueprint import user_blueprint
 
-app = Flask(__name__)
+import os
+from dotenv import load_dotenv
 
-app.register_blueprint(task_blueprint)
+load_dotenv()
+
+app = Flask(__name__)
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
+CORS(app)
+
+jwt = JWTManager(app)
+
+app.register_blueprint(autor_blueprint)
+app.register_blueprint(genero_blueprint)
+app.register_blueprint(libro_blueprint)
 app.register_blueprint(user_blueprint)
 
-cors = CORS(app)
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

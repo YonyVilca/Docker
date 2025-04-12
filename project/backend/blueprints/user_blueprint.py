@@ -1,41 +1,24 @@
-from flask import Flask
-from flask import Blueprint
-from flask import request
-from flask import jsonify
-from werkzeug.utils import secure_filename
-import json
-from flask_cors import CORS, cross_origin 
-
-from backend.models.mysql_user_model import UserModel
-model = UserModel()
-
+from flask import Blueprint, request, jsonify
+from flask_jwt_extended import create_access_token
+from datetime import timedelta
 
 user_blueprint = Blueprint('user_blueprint', __name__)
 
+USERS = {
+    "admin": "1234"
+}
 
-@user_blueprint.route('/user', methods=['POST'])
-@cross_origin()
-def create_user():
-    content = model.create_user(request.json['user_name'], request.json['user_lastname'], request.json['user_email'])    
-    return jsonify(content)
+@user_blueprint.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
 
-@user_blueprint.route('/user', methods=['PUT'])
-@cross_origin()
-def update_user():
-    content = model.update_user(request.json['user_id'], request.json['user_name'], request.json['user_lastname'], request.json['user_email'])    
-    return jsonify(content)
+    if not username or not password:
+        return jsonify({"msg": "Faltan credenciales"}), 400
 
-@user_blueprint.route('/user', methods=['DELETE'])
-@cross_origin()
-def delete_user():
-    return jsonify(model.delete_user(int(request.json['user_id'])))
-
-@user_blueprint.route('/user', methods=['GET'])
-@cross_origin()
-def user():
-    return jsonify(model.get_user(int(request.json['user_id'])))
-
-@user_blueprint.route('/users', methods=['GET'])
-@cross_origin()
-def users():
-    return jsonify(model.get_users())
+    if USERS.get(username) == password:
+        access_token = create_access_token(identity=username, expires_delta=timedelta(hours=1))
+        return jsonify(access_token=access_token), 200
+    else:
+        return jsonify({"msg": "Credenciales inválidas"}), 401

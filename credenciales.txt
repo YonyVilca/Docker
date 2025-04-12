@@ -1,1 +1,140 @@
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NDE1MzM5NSwianRpIjoiYTM1MDIzMzItNGRhMi00MjliLWFhYmQtMDY4NGY0OTc1MTg3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluIiwibmJmIjoxNzQ0MTUzMzk1LCJjc3JmIjoiOTFhZDgzZmItODBjNi00YjVjLWE2YjMtYzVkNDk0OGU0OGQ2IiwiZXhwIjoxNzQ0MTU2OTk1fQ.CCQAxGelgVnIo85OPoXelrRN-yRAAPPXIV62v8XpES4
+
+
+
+Inicia sesión y obtén el token
+
+
+http://localhost:5000/login
+
+
+
+{
+  "username": "admin",
+  "password": "1234"
+}
+
+
+
+Crear autores
+
+
+http://localhost:5000/autor
+
+{ "nombre_autor": "Herman Melville" }
+    { "nombre_autor": "J.K. Rowling" },
+    { "nombre_autor": "Ernest Hemingway" },
+    { "nombre_autor": "Jane Austen" },
+    { "nombre_autor": "Mark Twain" },
+    { "nombre_autor": "F. Scott Fitzgerald" },
+    { "nombre_autor": "George Orwell" },
+    { "nombre_autor": "Harper Lee" },
+    { "nombre_autor": "Leo Tolstoy" },
+    { "nombre_autor": "Virginia Woolf" },
+    { "nombre_autor": "Toni Morrison" },
+    { "nombre_autor": "Stephen King" },
+    { "nombre_autor": "Charles Dickens" },
+    { "nombre_autor": "Isaac Asimov" },
+    { "nombre_autor": "Herman Melville" }
+
+
+
+Crear géneros
+
+http://localhost:5000/genero
+
+
+{ "nombre_genero": "Realismo Mágico" },
+    { "nombre_genero": "Novela Histórica" },
+    { "nombre_genero": "Ficción Científica" },
+    { "nombre_genero": "Romance" },
+    { "nombre_genero": "Fantasía" },
+    { "nombre_genero": "Thriller" },
+    { "nombre_genero": "Misterio" },
+    { "nombre_genero": "Biografía" },
+    { "nombre_genero": "Poesía" },
+    { "nombre_genero": "Ensayo" },
+    { "nombre_genero": "Drama" },
+    { "nombre_genero": "Horror" },
+    { "nombre_genero": "Aventura" },
+    { "nombre_genero": "Literatura Infantil" },
+    { "nombre_genero": "Ciencia Ficción" }
+
+    Crear libros con autores
+
+
+    http://localhost:5000/libro
+
+    {
+        "titulo_libro": "Cien Años de Soledad",
+        "genero_id": 1,
+        "autor_ids": [1]
+    },
+    {
+        "titulo_libro": "Cartas de Amor",
+        "genero_id": 2,
+        "autor_ids": [2, 3]
+    },
+    {
+        "titulo_libro": "1984",
+        "genero_id": 3,
+        "autor_ids": [4]
+    },
+    {
+        "titulo_libro": "Harry Potter y la Piedra Filosofal",
+        "genero_id": 4,
+        "autor_ids": [5]
+    },
+    {
+        "titulo_libro": "El Gran Gatsby",
+        "genero_id": 5,
+        "autor_ids": [6]
+    },
+    {
+        "titulo_libro": "Orgullo y Prejuicio",
+        "genero_id": 2,
+        "autor_ids": [7]
+    },
+    {
+        "titulo_libro": "El Amor en los Tiempos del Cólera",
+        "genero_id": 1,
+        "autor_ids": [1]
+    },
+    {
+        "titulo_libro": "Moby Dick",
+        "genero_id": 6,
+        "autor_ids": [8]
+    },
+    {
+        "titulo_libro": "El Alquimista",
+        "genero_id": 4,
+        "autor_ids": [9]
+    },
+    {
+        "titulo_libro": "La Casa de los Espíritus",
+        "genero_id": 1,
+        "autor_ids": [1, 10]
+    }
+
+
+
+    Listar libros de un autor
+
+http://localhost:5000/libros/autor/1
+
+
+Listar autores de un libro
+http://localhost:5000/autores/libro/16
+
+
+Ejecutar el DELETE
+
+
+http://localhost:5000/libro
+
+{
+  "libro_id": 3
+}
+
+http://localhost:5000/libros get
+

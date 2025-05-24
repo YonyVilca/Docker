@@ -34,10 +34,11 @@ def delete_autor():
 @autor_blueprint.route('/autor', methods=['GET'])
 @jwt_required()
 def get_autor():
-    data = request.get_json()
-    if not data or 'autor_id' not in data:
+    autor_id = request.args.get('autor_id')
+    if not autor_id:
         return jsonify({"error": "autor_id es requerido"}), 400
-    return jsonify(autor_model.obtener_autor(data['autor_id']))
+    return jsonify(autor_model.obtener_autor(autor_id))
+
 
 @autor_blueprint.route('/autores', methods=['GET'])
 @jwt_required()

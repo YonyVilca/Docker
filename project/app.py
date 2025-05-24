@@ -22,5 +22,9 @@ app.register_blueprint(genero_blueprint)
 app.register_blueprint(libro_blueprint)
 app.register_blueprint(user_blueprint)
 
+@app.route('/')
+def home():
+    return {"message": "API Flask funcionando correctamente"}, 200
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

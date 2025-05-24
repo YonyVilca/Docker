@@ -32,10 +32,11 @@ def delete_genero():
 @genero_blueprint.route('/genero', methods=['GET'])
 @jwt_required()
 def get_genero():
-    data = request.get_json()
-    if not data or 'genero_id' not in data:
+    genero_id = request.args.get('genero_id')
+    if not genero_id:
         return jsonify({"error": "genero_id es requerido"}), 400
-    return jsonify(genero_model.obtener_genero(data['genero_id']))
+    return jsonify(genero_model.obtener_genero(genero_id))
+
 
 @genero_blueprint.route('/generos', methods=['GET'])
 @jwt_required()

@@ -34,10 +34,10 @@ def delete_libro():
 @libro_blueprint.route('/libro', methods=['GET'])
 @jwt_required()
 def get_libro():
-    data = request.get_json()
-    if 'libro_id' not in data:
+    libro_id = request.args.get('libro_id')
+    if not libro_id:
         return jsonify({"error": "libro_id es requerido"}), 400
-    return jsonify(libro_model.obtener_libro(data['libro_id']))
+    return jsonify(libro_model.obtener_libro(libro_id))
 
 @libro_blueprint.route('/libros', methods=['GET'])
 @jwt_required()
